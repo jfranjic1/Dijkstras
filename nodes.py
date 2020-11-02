@@ -8,7 +8,7 @@ class Node:
         if(a == 0 or a == 1):
             self.color = (255,0,0)
         if (a == 2):
-            self.color = (0,255,0)
+            self.color = (100,100,0)
     def draw(self, surface, x, y):
         self.x = x
         self.y = y

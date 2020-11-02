@@ -17,7 +17,7 @@ class Board:
         self.HEIGHT  = 600
         self.backgroundColor = (255,255,255)
         self.gridColor = (100,100,100)
-        self.squareSize = 5
+        self.squareSize = 20
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), 0, 32)
         self.surface = pygame.Surface(self.screen.get_size())
@@ -30,6 +30,7 @@ class Board:
         self.obstacklesBool = False
         self.matrix = list()
         self.space = False
+        self.result = list()
         # X, Y, Type (0 normal, 1 start, 2 end, 3 obstacle), visited #
         for i in range(0, self.WIDTH, self.squareSize):
             temp = list()
@@ -63,6 +64,7 @@ class Board:
                     while(g.itteration()):
                         pass
                     print("finished")
+                    self.drawPath(g.paths)
                 if event.key == pygame.K_LCTRL:
                     self.obstacklesBool = True
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -101,5 +103,27 @@ class Board:
             y = int (y/self.squareSize)
             self.matrix[x][y] = ((x*self.squareSize,y*self.squareSize), 3, 0)
 
-    def drawRect(self, visited):
-        pass
+
+    def drawPath(self, paths):
+        xstart = int (self.startNode.x/self.squareSize)
+        ystart = int(self.startNode.y/self.squareSize)
+        temp = (-1,-1)
+        endpos = len(paths)-1
+        temp = paths[endpos][1]
+        while(temp != (xstart,ystart)):
+            if(temp == paths[endpos][0]):
+                self.result.append(temp)
+                temp = paths[endpos][1]
+            endpos-=1
+        print("start" + str((xstart,ystart)))
+        print(self.result)
+        self.startNode.draw(self.surface,self.startNode.x,self.startNode.y)
+        self.endNode.draw(self.surface,self.endNode.x,self.endNode.y)
+        for k in self.result:
+            self.clock.tick(20)
+            self.screen.blit(self.surface, (0, 0))
+            a = (k[0]) * self.squareSize
+            b = (k[1] ) * self.squareSize
+            temp = pygame.Rect((a, b), (self.squareSize, self.squareSize))
+            pygame.draw.rect(self.surface, (0, 0, 0), temp)
+            pygame.display.update()
