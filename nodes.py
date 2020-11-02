@@ -2,7 +2,7 @@ import pygame
 
 class Node:
     def __init__(self, a = 0):
-        self.squaresize = 8
+        self.squaresize = 16
         self.x = 0
         self.y = 0
         if(a == 0 or a == 1):
