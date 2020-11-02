@@ -17,15 +17,15 @@ class Board:
         self.HEIGHT  = 600
         self.backgroundColor = (255,255,255)
         self.gridColor = (100,100,100)
-        self.squareSize = 20
+        self.squareSize = 10
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), 0, 32)
         self.surface = pygame.Surface(self.screen.get_size())
         self.surface = self.surface.convert()
-        self.startNode = nodes.Node()
+        self.startNode = nodes.Node(self.squareSize)
         self.startNodeBool = False
         self.endNodeBool = False
-        self.endNode = nodes.Node()
+        self.endNode = nodes.Node(self.squareSize)
         self.obstackles = list()
         self.obstacklesBool = False
         self.matrix = list()
@@ -59,7 +59,7 @@ class Board:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    g = GodsAlgorithm.GodsAlgorithm(self.matrix,self.startNode, self.surface, self.screen, self.clock)
+                    g = GodsAlgorithm.GodsAlgorithm(self.matrix,self.startNode, self.surface, self.screen, self.clock, self.squareSize)
                     while(g.itteration()):
                         pass
                     print("finished")
@@ -80,7 +80,7 @@ class Board:
             if(self.startNodeBool):
                 self.startNode.delete(self.surface)
                 self.matrix[int(self.startNode.x / self.squareSize)][int(self.startNode.y / self.squareSize)] = ((self.startNode.x, self.startNode.y), 0, 0)
-            self.startNode = nodes.Node(1)
+            self.startNode = nodes.Node(self.squareSize,1)
             self.startNode.draw(self.surface, pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0]  % self.squareSize, pygame.mouse.get_pos()[1] -  pygame.mouse.get_pos()[1] % self.squareSize)
             self.matrix[int(self.startNode.x/self.squareSize)][int(self.startNode.y/self.squareSize)] = ((self.startNode.x,self.startNode.y), 1, 0)
             self.startNodeBool = True
@@ -89,14 +89,14 @@ class Board:
             if (self.endNodeBool):
                 self.endNode.delete(self.surface)
                 self.matrix[int(self.endNode.x / self.squareSize)][int(self.endNode.y / self.squareSize)] = ((self.endNode.x, self.endNode.y), 0, 0)
-            self.endNode = nodes.Node(2)
+            self.endNode = nodes.Node(self.squareSize,2)
             self.endNode.draw(self.surface, pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % self.squareSize, pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % self.squareSize)
             self.endNodeBool = True
             self.matrix[int(self.endNode.x / self.squareSize)][int(self.endNode.y / self.squareSize)] = ((self.endNode.x, self.endNode.y), 2, 0)
         if (command == MIDDLECLICK):
             x = pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % self.squareSize
             y = pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % self.squareSize
-            self.obstackles.append(obstacle.Obstackle(self.surface, x,y))
+            self.obstackles.append(obstacle.Obstackle(self.squareSize,self.surface, x,y))
             x = int (x/self.squareSize)
             y = int (y/self.squareSize)
             self.matrix[x][y] = ((x*self.squareSize,y*self.squareSize), 3, 0)

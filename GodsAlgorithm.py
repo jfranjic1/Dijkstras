@@ -3,9 +3,9 @@ import nodes
 import pygame
 
 class GodsAlgorithm:
-    def __init__(self, matrix, startNode, surface, screen, clock):
+    def __init__(self, matrix, startNode, surface, screen, clock, squaresize):
         self.matrix = matrix
-        self.squaresize = 20
+        self.squaresize = squaresize
         self.paths = list()
         self.screen = screen
         self.clock = clock
@@ -67,7 +67,6 @@ class GodsAlgorithm:
         y = int (y)
         if(x + 1 > self.blocksWide-1): return
         if (self.matrix[x + 1][y][1] == 3):
-            self.cursors.remove(self.var)
             return False
         if (self.visited[x + 1][y] == 1): return False
         self.cursors.append(((x + 1, y),(x , y)))

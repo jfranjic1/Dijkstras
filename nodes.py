@@ -1,8 +1,8 @@
 import pygame
 
 class Node:
-    def __init__(self, a = 0):
-        self.squaresize = 16
+    def __init__(self, squaresize, a = 0):
+        self.squaresize = squaresize - squaresize*0.2
         self.x = 0
         self.y = 0
         if(a == 0 or a == 1):
