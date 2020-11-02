@@ -3,14 +3,14 @@ import nodes
 import pygame
 
 class GodsAlgorithm:
-    def __init__(self, matrix, startNode, surface, screen, clock, squaresize):
+    def __init__(self, matrix, startNode, surface, screen, clock, squaresize, screenwidth, screenheight):
         self.matrix = matrix
         self.squaresize = squaresize
         self.paths = list()
         self.screen = screen
         self.clock = clock
-        self.blocksWide = int(800/self.squaresize)
-        self.blocksHigh = int(600/ self.squaresize)
+        self.blocksWide = int(screenwidth/self.squaresize)
+        self.blocksHigh = int(screenheight/ self.squaresize)
         self.surface = surface
         x = int(startNode.x / self.squaresize)
         y = int(startNode.y/self.squaresize)

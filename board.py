@@ -8,16 +8,17 @@ RIGHTCLICK = 1
 LEFTCLICK = 2
 MIDDLECLICK = 3
 NAN = 69
+
 class Board:
     def __init__(self):
         ########################
         # SCREEN INITIALIZED #
         ######################
-        self.WIDTH = 800
+        self.WIDTH = 1300
         self.HEIGHT  = 600
         self.backgroundColor = (255,255,255)
         self.gridColor = (100,100,100)
-        self.squareSize = 10
+        self.squareSize = 15
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), 0, 32)
         self.surface = pygame.Surface(self.screen.get_size())
@@ -48,7 +49,7 @@ class Board:
         #self.startNode.draw(self.surface, 0, 0)
         #self.endNode.draw(self.surface, 790, 590)
         while(1):
-            self.clock.tick(100)
+            self.clock.tick(10000)
             self.screen.blit(self.surface, (0, 0))
             if(not self.space):
                 self.keypress()
@@ -60,7 +61,7 @@ class Board:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    g = GodsAlgorithm.GodsAlgorithm(self.matrix,self.startNode, self.surface, self.screen, self.clock, self.squareSize)
+                    g = GodsAlgorithm.GodsAlgorithm(self.matrix,self.startNode, self.surface, self.screen, self.clock, self.squareSize,self.WIDTH,self.HEIGHT)
                     while(g.itteration()):
                         pass
                     print("finished")
