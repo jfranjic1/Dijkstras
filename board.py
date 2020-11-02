@@ -17,7 +17,7 @@ class Board:
         self.HEIGHT  = 600
         self.backgroundColor = (255,255,255)
         self.gridColor = (100,100,100)
-        self.squareSize = 10
+        self.squareSize = 5
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), 0, 32)
         self.surface = pygame.Surface(self.screen.get_size())

@@ -9,16 +9,16 @@ class GodsAlgorithm:
         self.paths = list()
         self.screen = screen
         self.clock = clock
-        self.blocksWide = 800/self.squaresize
-        self.blocksHigh = 600/ self.squaresize
+        self.blocksWide = int(800/self.squaresize)
+        self.blocksHigh = int(600/ self.squaresize)
         self.surface = surface
         x = int(startNode.x / self.squaresize)
         y = int(startNode.y/self.squaresize)
         self.visited = list()
         self.ok = False
-        for i in range(0, 80):
+        for i in range(0, self.blocksWide):
             temp = list()
-            for j in range (0, 60):
+            for j in range (0, self.blocksHigh):
                 temp.append(0)
             self.visited.append(temp)
         self.visited[x][y] = 1
